@@ -2,8 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 
-import { SdBar, Videos } from "./";
-
+import { SdBar } from "./";
+ 
+import {Videos} from "./"
 import { fetchFromAPI } from "../utils/fetchFromApi";
 
 export default function Feed() {
@@ -13,7 +14,7 @@ export default function Feed() {
   const [videos, setVideos]= useState([]);
   
   useEffect(() => {
-    setVideos(null);
+  //  setVideos(null);
 
     fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
       .then((data) =>
@@ -59,7 +60,7 @@ export default function Feed() {
           {selectedCategory} <span style={{ color: "#FC1503" }}>videos</span>
         </Typography>
 
-        <Videos Videos={videos} />
+      <Videos videos={videos}></Videos>
       </Box>
     </Stack>
   );
