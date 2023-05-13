@@ -1,43 +1,45 @@
-import React from 'react'
-import {useSate} from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { Paper, IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
-import {usenavigate} from 'react-router-dom'
+const SearchBar = () => {
+  const [searchTerm, setSearchTerm] = useState(null);
+  const navigate = useNavigate();
 
-import { Paper, IconButton } from '@mui/material'
-import {Search} from '@mui/icons-material'
+  const onhandleSubmit = (event) => {
+    event.preventDefault();
 
+    if (searchTerm) {
+      navigate(`/search/${searchTerm}`);
 
-export default function SearchBar() {
+      setSearchTerm('');
+    }
+  };
+
   return (
     <Paper
-    component= "form"
-    onSubmit={ ()=> {}}
-    sx={{
-borderRadius:20,
-border: '1px solid #e3e3e3',
-pl:2,
-
-boxShadow:'none',
-mr: {sm:5}
-
-    }}    >
-<input
-className='sear-bar'
-placeholder='Search...'
-value=""
-onChange={ ()=> {}}
-sx={{ border : '0px'}}
-></input>
-<IconButton type='submit' 
-sx={{
-p: '10px',
-color: 'red'
-
-}}
->
-
-    <Search/>
-</IconButton>
+      component='form'
+      onSubmit={onhandleSubmit}
+      sx={{
+        borderRadius: 20,
+        border: '1px solid #e3e3e3',
+        pl: 2,
+        boxShadow: 'none',
+        mr: { sm: 5 },
+      }}
+    >
+      <input
+        className='search-bar'
+        placeholder='Search...'
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.target.value)}
+      />
+      <IconButton type='submit' sx={{ p: '10px', color: 'red' }} aria-label='search'>
+        <SearchIcon />
+      </IconButton>
     </Paper>
-  )
-}
+  );
+};
+
+export default SearchBar;
